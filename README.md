@@ -1,2 +1,3 @@
-# d3-brush-snapper
-d3 brush snapping
+# d3-brush-handles
+
+Customizeable brush handles for d3.js brush
