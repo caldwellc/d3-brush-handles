@@ -55,12 +55,12 @@ export function addHandlesToBrushX(brush, brushContainer, selectionFn, brushHeig
 
 	let selectionFunc = selectionFn;
 	if (selectionFn == null) {
-		selectionFn = s => s.selection;
+		selectionFunc = s => s.selection;
 	}
 
 	function handleBrushEvent(event) {
 		if (!event.sourceEvent) return;
-		updateHandles(selectionFn(event));
+		updateHandles(selectionFunc(event));
 	}
 
 	function brushed(event) {
