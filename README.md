@@ -2,6 +2,8 @@
 
 Library for adding handles to a one-dimensional d3 brush along the x-dimension.
 
+[![npm version](https://badge.fury.io/js/d3-brush-handles.svg)](https://badge.fury.io/js/d3-brush-handles)
+
 # add to d3 brush in browser
 ```html
 <!DOCTYPE html>
