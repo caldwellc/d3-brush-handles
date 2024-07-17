@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<div id="container"></div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@0.0.4"></script>
 <html>
     <body>
-        <script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@0.0.4"></script>
-        <div id="chart-area"></div>
-        <script src="examples/example.js"></script>
+        <div id="chart-div"></div>
+        <script>
+            // create chart
+            let width = 600;
+            let height = 400;
+
+            const margin = { top: 10, right: 30, bottom: 30, left: 40 };
+            width = width - margin.left - margin.right,
+            height = height - margin.top - margin.bottom;
+
+            // append the svg object to the body of the page
+            var svg = d3.select("#chart-div")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            const maxX = 1000;
+
+            // add x axis
+            const x = d3.scaleLinear()
+                .domain([0, maxX])
+                .range([0, width]);
+
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // generate random data
+            const data = [];
+            for (let i = 0; i < 1000; i++) {
+              data.push(Math.random() * maxX);
+            }
+
+            // create bins
+            const bin = d3.bin()
+                .domain(x.domain())
+                .thresholds(x.ticks(20));
+
+            const bins = bin(data);
+
+            // add y axis
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(bins, function (d) { return d.length; })])
+                .range([height, 0]);
+
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // append the bar rectangles to the svg element
+            svg.selectAll("rect")
+                .data(bins)
+                .enter()
+                .append("rect")
+                .attr("x", 1)
+                .attr("transform", function (d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
+                .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                .attr("height", function (d) { return height - y(d.length); })
+                .style("fill", "#69b3a2")
+
+            // add a brush container to the chart
+            const brushContainer = svg.append("g");
+
+            // create the brush
+            const brush = d3.brushX().extent([[0, 0], [width, height]]);
+            brushContainer.call(brush);
+
+            // move brush to the initial position
+            const initialPosition = [100, 200];
+            brushContainer.call(brush.move, initialPosition);
+
+            const handleWidth = 6;
+            const handleHeight = 20;
+
+            // add handles to the brush
+            window.d3BrushHandles.addHandlesToBrushX(brush, brushContainer, s => s.selection, height, handleWidth, handleHeight, initialPosition);
+        </script>
     </body>
 </html>
