@@ -9,29 +9,46 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 // import brush handles library
 <script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@0.0.2"></script>
+<!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@0.0.2"></script>
 <html>
     <body>
         <div id="chart-div"></div>
         <script>
             // create chart
-            const width = 600;
-            const height = 400;
-            const svg = d3.select("#chart-div")
+            let width = 600;
+            let height = 400;
+
+            const margin = { top: 10, right: 30, bottom: 30, left: 40 };
+            width = width - margin.left - margin.right,
+            height = height - margin.top - margin.bottom;
+
+            // append the svg object to the body of the page
+            var svg = d3.select("#chart-div")
                 .append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .append("g");
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            const maxX = 1000;
 
             // add x axis
             const x = d3.scaleLinear()
-                .domain([0, 2000])
+                .domain([0, maxX])
                 .range([0, width]);
-            
+
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
-            // const data = [...];
+            // generate random data
+            const data = [];
+            for (let i = 0; i < 1000; i++) {
+              data.push(Math.random() * maxX);
+            }
 
             // create bins
             const bin = d3.bin()
@@ -39,7 +56,7 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
                 .thresholds(x.ticks(20));
 
             const bins = bin(data);
-            
+
             // add y axis
             const y = d3.scaleLinear()
                 .domain([0, d3.max(bins, function (d) { return d.length; })])
@@ -59,7 +76,6 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
                 .attr("height", function (d) { return height - y(d.length); })
                 .style("fill", "#69b3a2")
 
-
             // add a brush container to the chart
             const brushContainer = svg.append("g");
 
@@ -68,7 +84,7 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
             brushContainer.call(brush);
 
             // move brush to the initial position
-            const initialPosition = [0, 10];
+            const initialPosition = [100, 200];
             brushContainer.call(brush.move, initialPosition);
 
             const handleWidth = 6;
@@ -79,4 +95,5 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
         </script>
     </body>
 </html>
+
 ```
