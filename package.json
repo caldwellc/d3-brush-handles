@@ -1,8 +1,8 @@
 {
   "name": "d3-brush-handles",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Brush handles for d3-brush",
-  "main": "dist/brush-handles.js",
+  "main": "dist/d3-brush-handles.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",
