@@ -1,0 +1,17 @@
+{
+  "name": "d3-brush-handles",
+  "version": "1.0.0",
+  "description": "Brush handles for d3-brush",
+  "main": "dist/brush-handles.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "build": "npx webpack --mode production"
+  },
+  "author": "Christopher Caldwell <c.caldwell90@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
