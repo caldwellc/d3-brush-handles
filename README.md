@@ -8,7 +8,7 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
 ```html
 <!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@0.0.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-brush-handles@1.0.1"></script>
 <html>
     <body>
         <div id="chart-div"></div>

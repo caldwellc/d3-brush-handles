@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 /**
  * Add handles to a x axis only brush (i.e. fixed y)
  * @param brush - d3 brush
