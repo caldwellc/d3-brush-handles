@@ -1,11 +1,11 @@
 /**
  * Add handles to a x axis only brush (i.e. fixed y)
- * @param brush
- * @param brushContainer
+ * @param brush - d3 brush
+ * @param brushContainer - d3 brush container
  * @param selectionFn - function to provide the selection provided by a brush event in case there is snapping or other modifications done
- * @param brushHeight
- * @param handleWidth
- * @param handleHeight
+ * @param brushHeight - height of brush in pixels
+ * @param handleWidth - width of brush in pixels
+ * @param handleHeight - height of chart
  * @param initialSelection - initial brush selection so we can place the handles
  * @param insetWest - will inset the brush as it reaches its minimum value
  * @param insetEast - will inset the brush as it reaches its maximum value
