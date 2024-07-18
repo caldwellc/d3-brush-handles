@@ -6,7 +6,7 @@ Library for adding handles to a one-dimensional d3 brush along the x-dimension.
 
 
 # Example
-[Example](https://caldwellc.github.io/d3-brush-handles/)
+[See it in action here](https://caldwellc.github.io/d3-brush-handles/)
 
 ![Brush Example](https://github.com/caldwellc/d3-brush-handles/blob/main/brush-example.png?raw=true)
 
